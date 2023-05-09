@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import { Post, PostComment } from './models/Post'
+import { useEffect, useState } from 'react';
+import './App.css';
+import { PostList } from './components/PostList';
+import { Post, PostComment } from './models/Post';
 
 function App() {
   const [posts, setPosts] = useState<Post[]>();
@@ -28,27 +29,7 @@ function App() {
   return (
     <div className="App">
       <h1>NCQA</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>User Id</th>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Body</th>
-          </tr>
-        </thead>
-        <tbody>
-          {posts?.map(p => (
-            <tr key={p.id}>
-              <td>{p.userId}</td>
-              <td>{p.id}</td>
-              <td>{p.title}</td>
-              <td>{p.body}</td>
-              <td><button className='my-button' onClick={() => getComments(p.id)}>Get Comment</button></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <PostList posts={posts} getComments={getComments} />
       <h3>Comments</h3>
       {comments?.map(c => (
         <div key={c.id}>
