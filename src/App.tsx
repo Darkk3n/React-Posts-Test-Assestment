@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>NCQA</h1>
+      <h1>Test Assestment</h1>
       <PostList posts={posts} getComments={getComments} />
       <h3>Comments</h3>
       {comments?.map(c => (
