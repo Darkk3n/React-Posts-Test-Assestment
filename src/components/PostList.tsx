@@ -1,10 +1,15 @@
-import { Post } from "../models/Post";
+import { useState } from "react";
+import { Post, PostComment } from "../models/Post";
+import { getComments } from "../services/postComments";
+import { PostComments } from "./PostComments";
 
 interface Props {
    posts: Post[] | undefined
-   getComments(postId: number): void
+
 }
-export function PostList({ posts, getComments }: Props) {
+export function PostList({ posts }: Props) {
+   const [comments, setComments] = useState<PostComment[]>()
+
    return (
       <>
          <h1>Test Assestment</h1>
@@ -24,11 +29,12 @@ export function PostList({ posts, getComments }: Props) {
                      <td>{p.id}</td>
                      <td>{p.title}</td>
                      <td>{p.body}</td>
-                     <td><button className='my-button' onClick={() => getComments(p.id)}>Get Comment</button></td>
+                     <td><button className='my-button' onClick={async () => setComments(await getComments(p.id))}>Get Comment</button></td>
                   </tr>
                ))}
             </tbody>
          </table>
+         {comments && <PostComments comments={comments} />}
       </>
    )
 }
