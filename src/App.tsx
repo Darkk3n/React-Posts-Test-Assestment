@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import { PostComments } from './components/PostComments';
 import { PostList } from './components/PostList';
 import { Post, PostComment } from './models/Post';
 
@@ -29,15 +30,9 @@ function App() {
   return (
     <div className="App">
       <h1>Test Assestment</h1>
-      <PostList posts={posts} getComments={getComments} />
+      {posts && <PostList posts={posts} getComments={getComments} />}
       <h3>Comments</h3>
-      {comments?.map(c => (
-        <div key={c.id}>
-          <h3>Post Id {c.postId}</h3>
-          <h4>Comment Id {c.id}</h4>
-          <p >{c.body}</p>
-        </div>
-      ))}
+      {comments && <PostComments comments={comments} />}
     </div>
   )
 }
